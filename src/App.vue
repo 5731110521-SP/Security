@@ -132,7 +132,6 @@
 </svg>
 Application Name</left>
         <right>
-            <button><i class="fas fa-plus-circle"></i>New</button>
             <i class="fas fa-user"></i>
             Admin
         </right>
@@ -144,8 +143,8 @@ Application Name</left>
             <item>Application Profile<i class="fas fa-arrow-right"></i></item>
             <item>Function Management<i class="fas fa-arrow-right"></i></item>
             <item><b>Security</b></item>
-            <item>Customer Tracking Log<i class="fas fa-arrow-right"></i></item>
-            <item>Security Configuration<i class="fas fa-arrow-right"></i></item>
+            <item @click="goPage('ViewLog')">Customer Tracking Log<i class="fas fa-arrow-right"></i></item>
+            <item @click="goPage('ConfigSearch')">Security Configuration<i class="fas fa-arrow-right"></i></item>
         </sidebar>
 
         <router-view/>
@@ -181,12 +180,16 @@ export default {
     closePopUp(id){
       var x = document.getElementById(id);
       x.style.display = "none";
+    },
+    goPage(page){
+      this.$router.push(page)
     }
   }
 }
 </script>
 
 <style src="./css/app.css"></style>
+<style src="./css/all.css"></style>
 <style>
 /* @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');

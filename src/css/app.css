@@ -83,6 +83,7 @@ page sidebar item {
   height: 44px;
   border-bottom: 1px solid #ddd;
   color: #777;
+  cursor: pointer;
 }
 page sidebar item i {
   color: #ccc;
@@ -91,7 +92,7 @@ page header {
   padding: 20px;
   grid-area: container_header;
   display: grid;
-  grid-template-columns: 45% 45% 10%;
+  grid-template-columns: 30% 30% 10% 10% 20%;
   grid-template-rows: auto;
   grid-template-areas: "left_input right_input button";
 }
@@ -120,6 +121,31 @@ page header button {
   font-weight: bold;
   text-align: center;
   z-index: -1;
+  cursor: pointer;
+}
+page header .search_button {
+  all: unset;
+  height: 40px;
+  grid-area: button;
+  background-color: #38f3f3;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  z-index: -1;
+  cursor: pointer;
+}
+page header .new_button {
+  all: unset;
+  box-sizing: border-box;
+  color: #1c2c83;
+  border: 3px solid #1c2c83;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100px;
+  cursor: pointer;
 }
 page content {
   grid-area: container_content;

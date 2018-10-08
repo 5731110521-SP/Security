@@ -50,10 +50,12 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="pagination">
-                <a :class="pageNumber==1?'hidden':''" @click="pageBack">&laquo;</a>
-                <a :class="i==pageNumber?'active':''" v-for="i in computedPageNumberMax" :key="i" @click="pageGo(i)">{{i}}</a>
-                <a :class="pageNumber==computedPageNumberMax?'hidden':''" @click="pageNext">&raquo;</a>
+            <div style="text-align: center;">
+                <div class="pagination">
+                    <a :class="pageNumber==1?'hidden':''" @click="pageBack">&laquo;</a>
+                    <a :class="i==pageNumber?'active':''" v-for="i in computedPageNumberMax" :key="i" @click="pageGo(i)">{{i}}</a>
+                    <a :class="pageNumber==computedPageNumberMax?'hidden':''" @click="pageNext">&raquo;</a>
+                </div>
             </div>
         </content>
     </div>
@@ -91,7 +93,11 @@ export default {
         }
     },
     watch:{
-        searchValue: "getData",
+        searchValue: function (val) {
+            console.log('asd')
+            this.pageNumber = 1
+            this.getData()
+        },
         searchByRaw: "getParams",
         searchBy: "getData",
         pageNumber: "getData"
