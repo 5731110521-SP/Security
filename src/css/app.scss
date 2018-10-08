@@ -1,0 +1,195 @@
+@import "https://use.fontawesome.com/releases/v5.3.1/css/all.css";
+@import "https://fonts.googleapis.com/css?family=K2D";
+
+html, body{
+    margin: 0;
+    font-family: 'K2D', sans-serif;
+
+}
+
+*{
+    box-sizing: border-box;
+}
+
+$navbar_ht: 100px;
+
+@mixin navbar_item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    color: white;
+    font-size: 16px;
+}
+
+navbar{
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: $navbar_ht;
+    background-color: #1c2c83;
+
+    left{
+        width:auto; 
+        @include navbar_item;
+        font-size: 32px;
+
+        object{
+            margin-right: 15px;
+        }
+    }
+
+    // middle{
+    //     flex: 1;
+    //     @include navbar_item;
+    // }
+
+    right{
+        width:auto;
+        @include navbar_item;
+        font-size: 20px;
+
+        *{
+            margin: 30px;
+        }
+
+        i{
+            font-size: 30px;
+        }
+
+        button{
+            all:unset;
+            box-sizing: border-box;
+            color: white;
+            border: 3px solid white;
+            padding: 5px 10px;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100px;
+
+            i{
+                font-size: 20px;
+                margin: 0;
+            }
+        }
+    }
+}
+
+page{
+    margin-top: $navbar_ht;
+    display: grid;
+    grid-template-columns: 17% 83%;
+    grid-template-rows: 75px auto;
+    grid-template-areas: 
+        "sidebar container_header"
+        "sidebar container_content";
+
+    sidebar{
+        grid-area: sidebar;
+        padding: 25px;
+        
+
+        display: flex;
+        flex-direction: column;
+
+        item{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            font-size: 24px;
+            height: 44px;
+            border-bottom: 1px solid #ddd;
+            color: #777;
+
+            i{
+                color: #ccc;
+            }
+        }
+    }
+
+    header{
+        padding: 20px;
+        grid-area: container_header;
+
+        display:grid;
+        grid-template-columns: 45% 45% 10%;
+        grid-template-rows: auto;
+        grid-template-areas: 
+            "left_input right_input button";
+
+        .left_input, .right_input{
+            all: unset;
+
+            border: 1px solid #ccc;
+            width: 100%;
+            height: 40px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .left_input{
+            grid-area: left_input;
+            border-right:none;
+        }
+
+        .right_input{
+            grid-area: right_input;
+        }
+
+        button{
+            all: unset;
+            height: 40px;
+            grid-area: button;
+            background-color: rgb(56, 243, 243);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            z-index: -1;
+        }
+        
+    }
+
+    content{
+        grid-area: container_content;
+        padding: 20px;
+
+        table{
+            width: 100%;
+
+            thead{
+                th{
+                    text-align: left;
+                    padding: 15px;
+                }
+
+                tr{
+                    height: 40px;
+                    background-color: rgb(82, 81, 81);
+                    color: white;
+                }
+            }
+
+            tbody{
+                tr{
+                    height: 40px;
+                    background-color: #fefefe;
+
+                        &:nth-child(2n){
+                            background-color: #f8f8f8;
+                        }
+
+                    td{
+                        text-align: left;
+                        padding: 15px;
+
+                        
+                    }
+                }
+            }
+        }
+    }
+}

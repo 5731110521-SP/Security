@@ -1,0 +1,152 @@
+@import "https://use.fontawesome.com/releases/v5.3.1/css/all.css";
+@import "https://fonts.googleapis.com/css?family=K2D";
+html, body {
+  margin: 0;
+  font-family: "K2D", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+navbar {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100px;
+  background-color: #1c2c83;
+  z-index: 3;
+}
+navbar left {
+  width: auto;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: white;
+  font-size: 16px;
+  font-size: 32px;
+}
+navbar left object {
+  margin-right: 15px;
+}
+navbar right {
+  width: auto;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: white;
+  font-size: 16px;
+  font-size: 20px;
+}
+navbar right * {
+  margin: 30px;
+}
+navbar right i {
+  font-size: 30px;
+}
+navbar right button {
+  all: unset;
+  box-sizing: border-box;
+  color: white;
+  border: 3px solid white;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100px;
+}
+navbar right button i {
+  font-size: 20px;
+  margin: 0;
+}
+
+page {
+  margin-top: 100px;
+  display: grid;
+  grid-template-columns: 17% 83%;
+  grid-template-rows: 75px auto;
+  grid-template-areas: "sidebar container_header" "sidebar container_content";
+}
+page sidebar {
+  grid-area: sidebar;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+}
+page sidebar item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  height: 44px;
+  border-bottom: 1px solid #ddd;
+  color: #777;
+}
+page sidebar item i {
+  color: #ccc;
+}
+page header {
+  padding: 20px;
+  grid-area: container_header;
+  display: grid;
+  grid-template-columns: 45% 45% 10%;
+  grid-template-rows: auto;
+  grid-template-areas: "left_input right_input button";
+}
+page header .left_input, page header .right_input {
+  all: unset;
+  border: 1px solid #ccc;
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+page header .left_input {
+  grid-area: left_input;
+  border-right: none;
+}
+page header .right_input {
+  grid-area: right_input;
+}
+page header button {
+  all: unset;
+  height: 40px;
+  grid-area: button;
+  background-color: #38f3f3;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  z-index: -1;
+}
+page content {
+  grid-area: container_content;
+  padding: 20px;
+}
+page content table {
+  width: 100%;
+}
+page content table thead th {
+  text-align: left;
+  padding: 15px;
+}
+page content table thead tr {
+  height: 40px;
+  background-color: #525151;
+  color: white;
+}
+page content table tbody tr {
+  height: 40px;
+  background-color: #fefefe;
+}
+page content table tbody tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+page content table tbody tr td {
+  text-align: left;
+  padding: 15px;
+}
+
+/*# sourceMappingURL=app.css.map */
