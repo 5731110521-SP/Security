@@ -20,10 +20,12 @@
                                 <p>Configuration Name: {{deletingItem.configurationname}}</p>
                                 <p>Value: {{deletingItem.value}}</p>
                             </div>
-                            <button class="submitBtn" type="button" @click="Delete">OK</button>
-                            <button class="submitBtn" type="button" @click="showModalDelete=false">
-                                Cancel
-                            </button>
+                            <div style="width:100%;justify-content: space-between;display: flex;padding:0 10%">
+                                <button class="submitBtn" type="button" @click="showModalDelete=false">
+                                    Cancel
+                                </button>
+                                <button class="submitBtn" type="button" @click="Delete">OK</button>
+                            </div>
                         </div>
                     </div>   
                 </div>
@@ -40,7 +42,9 @@
                 :hide-selected="true">
             </multiselect>
             <input class='right_input' type="text" value="" v-model="searchValue">
-            <button>Search</button>
+            <button class="search_button">Search</button>
+            <a></a>
+            <button class="new_button" @click="showAddModal()"><i class="fas fa-plus-circle"></i>New</button>
         </header>
         <content>
             <table cellspacing="0">
@@ -70,10 +74,12 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="pagination">
-                <a :class="pageNumber==1?'hidden':''" @click="pageBack">&laquo;</a>
-                <a :class="i==pageNumber?'active':''" v-for="i in computedPageNumberMax" :key="i" @click="pageGo(i)">{{i}}</a>
-                <a :class="pageNumber==computedPageNumberMax?'hidden':''" @click="pageNext">&raquo;</a>
+            <div style="text-align: center;">
+                <div class="pagination">
+                    <a :class="pageNumber==1?'hidden':''" @click="pageBack">&laquo;</a>
+                    <a :class="i==pageNumber?'active':''" v-for="i in computedPageNumberMax" :key="i" @click="pageGo(i)">{{i}}</a>
+                    <a :class="pageNumber==computedPageNumberMax?'hidden':''" @click="pageNext">&raquo;</a>
+                </div>
             </div>
         </content>
         <modal v-if="showModal1" @close="showModal1 = false">
@@ -335,6 +341,7 @@ export default {
   border: none; /* Remove borders */
 }
 
+<<<<<<< HEAD
 .submitBtn {
   /* margin-top: 30px; */
   width: auto;
@@ -349,6 +356,8 @@ export default {
 .submitBtn:hover {
   background: rgb(97, 134, 255);
 }
+=======
+>>>>>>> 34784125ce0f6d9886c1676123ba9b0016621cfa
 .pagination {
   display: inline-block;
 }
