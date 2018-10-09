@@ -92,151 +92,155 @@
 </template>
 
 <script>
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 
 export default {
-    name: 'ViewLog',
-    data() {
-        return {
-            datalist: [{
-                sysname: 'CRM',
-                configurationname: 'PanuvitV',
-                Value: '192.9.0.122',
-            },
-            {
-                sysname: 'CRM',
-                configurationname: 'PanuvitV',
-                Value: '192.9.0.122',
-            },
-            {
-                sysname: 'CRM',
-                configurationname: 'PanuvitV',
-                Value: '192.9.0.122',
-            }],
-            datatotal: 0,
-            pageNumber: 1,
-            pageSize: 5,
-            searchBy: [],
-            searchByRaw: [],
-            searchOptions: [
-                {name:'System Name', code:'sysname'},
-                {name:'Configuration Name', code:'configurationname'}
-            ],
-            searchValue: '',
-            showModal1: false,
-            showModal2: false,
-            showModalDelete: false,
-            deletingItem: null,
-            mode: 'Add',
-            editingItem: null,
+  name: "ViewLog",
+  data() {
+    return {
+      datalist: [
+        {
+          sysname: "CRM",
+          configurationname: "PanuvitV",
+          Value: "192.9.0.122"
+        },
+        {
+          sysname: "CRM",
+          configurationname: "PanuvitV",
+          Value: "192.9.0.122"
+        },
+        {
+          sysname: "CRM",
+          configurationname: "PanuvitV",
+          Value: "192.9.0.122"
         }
+      ],
+      datatotal: 0,
+      pageNumber: 1,
+      pageSize: 5,
+      searchBy: [],
+      searchByRaw: [],
+      searchOptions: [
+        { name: "System Name", code: "sysname" },
+        { name: "Configuration Name", code: "configurationname" }
+      ],
+      searchValue: "",
+      showModal1: false,
+      showModal2: false,
+      showModalDelete: false,
+      deletingItem: null,
+      mode: "Add",
+      editingItem: null
+    };
+  },
+  watch: {
+    searchValue: "getData",
+    searchByRaw: "getParams",
+    searchBy: "getData",
+    pageNumber: "getData"
+  },
+  computed: {
+    computedPageNumberMax: function() {
+      var floor = Math.floor(this.datatotal / this.pageSize);
+      if (this.datatotal / this.pageSize > floor) {
+        return floor + 1;
+      } else {
+        return floor;
+      }
+    }
+  },
+  created() {
+    this.getData();
+    this.$parent.page = "configsearch";
+  },
+  methods: {
+    getData() {
+      var vm = this;
+      axios
+        .get(process.env.ROOT_API + "security-config", {
+          params: {
+            fields: this.searchBy,
+            value: this.searchValue,
+            pagenumber: this.pageNumber,
+            pagesize: this.pageSize
+          }
+        })
+        .then(response => {
+          if (response.data == null) {
+            vm.datalist = [];
+            vm.datatotal = 0;
+          } else {
+            vm.datalist = response.data.configuration;
+            vm.datatotal = response.data.total;
+          }
+        })
+        .catch(function(error) {
+          vm.$parent.messageError("Get Employee Failed!", error.response.data);
+          console.log(error);
+        });
     },
-    watch:{
-        searchValue: "getData",
-        searchByRaw: "getParams",
-        searchBy: "getData",
-        pageNumber: "getData"
+    handleSubmit() {
+      this.getData();
     },
-    computed:{
-        computedPageNumberMax: function(){
-            var floor = Math.floor(this.datatotal/this.pageSize)
-            if(this.datatotal/this.pageSize>floor){
-                return floor+1
-            }else{
-                return floor
-            }
-        }
+    clear() {
+      this.searchByRaw = [];
+      this.searchValue = "";
+      this.getData();
     },
-    created(){
-        this.getData()
-        this.$parent.page = 'configsearch'
+    showAddModal() {
+      // this.showModal1=true
+      this.mode = "Add";
+      this.showModal2 = true;
+      console.log("showadd");
     },
-    methods:{
-        getData(){
-            var vm = this
-            axios.get(process.env.ROOT_API+'security-config',{
-                params: {
-                    fields: this.searchBy,
-                    value: this.searchValue,
-                    pagenumber: this.pageNumber,
-                    pagesize: this.pageSize,
-                }
-            })
-            .then(response => {
-                if(response.data == null){
-                    vm.datalist = []
-                    vm.datatotal = 0
-                }else{
-                    vm.datalist = response.data.configuration
-                    vm.datatotal = response.data.total
-                }
-              })
-            .catch(function (error) {
-                vm.$parent.messageError('Get Employee Failed!',error.response.data)
-                console.log(error);
-              })
-        },
-        handleSubmit(){
-            this.getData()
-        },
-        clear(){
-            this.searchByRaw = []
-            this.searchValue = ''
-            this.getData()
-        },
-        showAddModal(){
-            // this.showModal1=true
-            this.mode = 'Add'
-            this.showModal2=true
-            console.log('showadd')
-        },
-        hideModel(){
-            this.showModal2=false
-            this.getData()
-        },
-        Delete(){
-            axios.put(process.env.ROOT_API+'security-config/delete', {
-                "id": this.deletingItem.id,
-            })
-            .then(response => {
-                // vm.$parent.messageError('Delete Success','')
-                this.getData()
-                this.showModalDelete = false
-            })
-            .catch(function (error) {
-                // vm.$parent.messageError('Delete Failed!',error.response.data)
-                console.log(error);
-            })
-        },
-        messageDelete(item){
-            this.deletingItem = item
-            this.showModalDelete = true
-        },
-        edit(item){
-            this.mode = 'Edit'
-            this.editingItem = item
-            this.showModal2 = true
-        },
-        getParams(){
-            this.searchBy = []
-            this.searchByRaw.forEach(element => {
-                this.searchBy.push(element.code)
-            });
-        },
-        pageBack(){
-            if(this.pageNumber == 1) return
-            this.pageNumber -= 1
-        },
-        pageNext(){
-            if(this.pageNumber == this.computedPageNumberMax) return
-            this.pageNumber += 1
-        },
-        pageGo(i){
-            this.pageNumber = i
-        }
+    hideModel() {
+      this.showModal2 = false;
+      this.getData();
     },
-}
+    Delete() {
+      axios
+        .put(process.env.ROOT_API + "security-config/delete", {
+          id: this.deletingItem.id
+        })
+        .then(response => {
+          // vm.$parent.messageError('Delete Success','')
+          this.getData();
+          this.showModalDelete = false;
+        })
+        .catch(function(error) {
+          // vm.$parent.messageError('Delete Failed!',error.response.data)
+          console.log(error);
+        });
+    },
+    messageDelete(item) {
+      this.deletingItem = item;
+      this.showModalDelete = true;
+    },
+    edit(item) {
+      this.mode = "Edit";
+      this.editingItem = item;
+      this.showModal2 = true;
+    },
+    getParams() {
+      this.searchBy = [];
+      this.searchByRaw.forEach(element => {
+        this.searchBy.push(element.code);
+      });
+    },
+    pageBack() {
+      if (this.pageNumber == 1) return;
+      this.pageNumber -= 1;
+    },
+    pageNext() {
+      if (this.pageNumber == this.computedPageNumberMax) return;
+      this.pageNumber += 1;
+    },
+    pageGo(i) {
+      this.pageNumber = i;
+    }
+  }
+};
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
@@ -265,9 +269,9 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   display: table;
-  transition: opacity .3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .modal-wrapper {
@@ -281,8 +285,8 @@ export default {
   padding: 20px 30px;
   background-color: #fff;
   border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-  transition: all .3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all 0.3s ease;
   font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -323,48 +327,50 @@ export default {
 }
 
 .tableimage {
-    width: 15px;
-    height: 15px;
+  width: 15px;
+  height: 15px;
 }
 .btn {
-    background-color: Transparent; /* Blue background */
-    border: none; /* Remove borders */
+  background-color: Transparent; /* Blue background */
+  border: none; /* Remove borders */
 }
 
-.submitBtn{
+.submitBtn {
   /* margin-top: 30px; */
   width: auto;
   height: auto;
-  background: #4974FF;
+  background: #4974ff;
   color: white;
   padding: 10px;
   cursor: pointer;
-  border-radius: 15px
+  border-radius: 15px;
 }
 
-.submitBtn:hover{
+.submitBtn:hover {
   background: rgb(97, 134, 255);
 }
 .pagination {
-    display: inline-block;
+  display: inline-block;
 }
 
 .pagination a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-    cursor: pointer;
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .pagination a.active {
-    background-color: #4CAF50;
-    color: white;
+  background-color: #4caf50;
+  color: white;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+}
 
-.pagination .hidden{
-    visibility: hidden;
+.pagination .hidden {
+  visibility: hidden;
 }
 </style>

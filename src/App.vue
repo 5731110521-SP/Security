@@ -155,37 +155,37 @@ Application Name</left>
 </template>
 
 <script>
-import techbilogo from './assets/techbilogo.svg'
+import techbilogo from "./assets/techbilogo.svg";
 export default {
-  name: 'App',
+  name: "App",
   data() {
     return {
-      modalError:{
-        title: '',
-        content: '',
+      modalError: {
+        title: "",
+        content: "",
         techbilogo
       }
-    }
+    };
   },
-  methods:{
-    messageError(title,content){
-      console.log(title)
-      this.modalError.title = title
-      this.modalError.content = content
-      this.$root.$emit('bv::show::modal', 'modalError')
+  methods: {
+    messageError(title, content) {
+      console.log(title);
+      this.modalError.title = title;
+      this.modalError.content = content;
+      this.$root.$emit("bv::show::modal", "modalError");
     },
-    showPopUp(id){
+    showPopUp(id) {
       var x = document.getElementById(id);
       x.style.display = "block";
     },
-    closePopUp(id){
+    closePopUp(id) {
       var x = document.getElementById(id);
       x.style.display = "none";
     }
   }
-}
+};
 </script>
-
+<style src="./css/all.css"></style>
 <style src="./css/app.css"></style>
 <style>
 /* @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
