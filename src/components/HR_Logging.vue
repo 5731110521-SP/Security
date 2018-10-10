@@ -13,9 +13,9 @@
                 <span>นามสกุล(ไทย): </span>
                 <input style="margin:10px;" type="text" v-model="surname_thai"/>
                 <span>ตั้งแต่วันที่: </span>
-                 <date-picker style="margin:10px;" v-model="date_from" lang="en" type="datetime" format="[on] MM-DD-YYYY [at] HH:mm:ss"></date-picker>
+                 <date-picker style="margin:10px;" v-model="date_from" lang="en" type="datetime" format="[on] MM-DD-YYYY [at] HH:mm:ss" confirm></date-picker>
                 <span>ถึงวันที่: </span>
-                 <date-picker style="margin:10px;" v-model="date_to" lang="en" type="datetime" format="[to] MM-DD-YYYY [at] HH:mm:ss"></date-picker>
+                 <date-picker style="margin:10px;" v-model="date_to" lang="en" type="datetime" format="[to] MM-DD-YYYY [at] HH:mm:ss" confirm></date-picker>
                 <br>
                 <span>Action: </span>
                 <div style="margin:10px;" >
@@ -35,7 +35,7 @@
                   </select>
                 </div>
                 <br>
-                <button class="submitbtn" type="submit">Search</button>
+                <button class="submitbtn" type="submit" @click="getTime()">Search</button>
                 <button class="submitbtn" type="submit" @click="sentTime()">Post</button>
             </div>
         </div>
@@ -62,6 +62,7 @@
                     <td>{{ data.datetime }}</td>
                     <td>{{ data.status }}</td>
                     <td>{{ data.errmsg }}</td>
+                    <td>{{ gettime }}</td>
                   </tr>
                 </tbody>
             </table>
@@ -103,7 +104,8 @@ export default {
       action: "",
       selected: "",
       responseForTable: "",
-      time: ""
+      time: "",
+      gettime: ""
     };
   },
   async mounted() {
@@ -118,8 +120,11 @@ export default {
       const response = await axios.get(
         "http://192.9.58.79:8000/api/security-hrlogtracking"
       );
-      console.log("data : " + JSON.stringify(response.data));
+      // console.log("data : " + JSON.stringify(response.data));
       this.responseForTable = response.data;
+    },
+    gettime: function() {
+      this.responseForTable = this.gettime;
     }
   },
   methods: {
@@ -145,7 +150,34 @@ export default {
           }
         })
         .catch(function(error) {
-          vm.$parent.messageError("Post Failed!", error.response.data);
+          console.log(error);
+        });
+    },
+    getTime() {
+      // var datefrom = new Date(this.date_from)
+      // var dateto = new String(this.date_to)
+      // console.log(datefrom+dateto)
+      axios
+        .get("http://192.9.58.79:8000/api/security-hrlogtracking", {
+          params: {
+            empcode: this.employee_id,
+            memonum: this.memo_id,
+            firstname: this.name_thai,
+            lastname: this.surname_thai,
+            action: this.action,
+            fromdatetime: this.date_from,
+            todatetime: this.date_to
+          }
+        })
+        .then(response => {
+          if (response.data == null) {
+            console.log(error);
+          } else {
+            this.responseForTable = response.data;
+            console.log("time: " + this.gettime);
+          }
+        })
+        .catch(function(error) {
           console.log(error);
         });
     }

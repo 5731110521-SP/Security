@@ -341,7 +341,6 @@ export default {
   border: none; /* Remove borders */
 }
 
-<<<<<<< HEAD
 .submitBtn {
   /* margin-top: 30px; */
   width: auto;
@@ -356,8 +355,6 @@ export default {
 .submitBtn:hover {
   background: rgb(97, 134, 255);
 }
-=======
->>>>>>> 34784125ce0f6d9886c1676123ba9b0016621cfa
 .pagination {
   display: inline-block;
 }
