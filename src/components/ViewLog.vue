@@ -94,7 +94,6 @@ export default {
     },
     watch:{
         searchValue: function (val) {
-            console.log('asd')
             this.pageNumber = 1
             this.getData()
         },
@@ -165,27 +164,6 @@ export default {
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style>
-/* .tablestyle table{
-    margin-left:10px;margin-right:10px;margin-top:30px;
-}
-
-.tablestyle td{
-    text-align: center;
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: 15px;
-    border: 1px solid #ddd;
-}
-.tablestyle th{
-    text-align: center;
-    padding: 10px;
-    border: 1px solid #ddd;
-}
-.tablestyle td div{
-    text-align: left;
-} */
-
 .pagination {
     display: inline-block;
 }

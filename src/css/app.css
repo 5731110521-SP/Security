@@ -161,12 +161,14 @@ page headerinput .input_name{
 }
 
 page headerinput .left_input {
+  height:40px;
   border-right: none;
   border: 1px solid #ccc;
   width: 100%;
 }
 
 page headerinput .right_input {
+  height:40px;
   border-left: none;
   border: 1px solid #ccc;
   width: 100%;

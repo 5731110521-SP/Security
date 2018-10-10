@@ -4,6 +4,7 @@ import ViewLog from '@/components/ViewLog'
 import ConfigAdd from '@/components/ConfigAdd'
 import ConfigSearch from '@/components/ConfigSearch'
 import HRLog_multi from '@/components/HRLog_multi'
+import HR_Logging from '@/components/HR_Logging'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
       path: '/hrlog_multi',
       name: 'HRLog_multi',
       component: HRLog_multi
+    },
+    {
+      path: '/hrLogging',
+      name: 'HR_Logging',
+      component: HR_Logging
     }
   ],
 })

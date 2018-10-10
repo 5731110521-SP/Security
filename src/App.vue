@@ -1,37 +1,5 @@
 <template>
   <div id="app">
-    <!-- <img class="menuBtn" v-on:click="showPopUp('sideBar')" src="./assets/list.png">
-    <div class="sideBar" id="sideBar">
-      <div class="divInSideBar">
-        <img class="closeMenuBtn" style="margin-top:20px" v-on:click="closePopUp('sideBar')" src="./assets/cancel.png">
-        <div><b><u>AdminTools</u></b>
-          <div style="cursor: pointer;" v-on:click="gotoApplicationProfiles()">Application Profiles</div>
-          <div style="cursor: pointer;" v-on:click="gotoApplicationProfiles()">Function Managment</div>
-        </div>
-
-        <div style="margin-top:20px"><b><u>Security</u></b>
-          <a href="http://192.9.58.252:8080/configSearch">
-            <div style="cursor: pointer;">Configuration Managment</div>
-          </a>
-          <a href="http://192.9.58.252:8080/viewLog">
-            <div style="cursor: pointer;">View Customer Data Tracking</div>
-          </a>
-        </div>
-      
-      </div>
-    </div>
-    <div class="borderOnTop">
-      <img class="sansirilogo" src="./assets/Sansiri-Logo.jpg">
-      <div class="textOnTop">
-        <div class="headerThai">Application Profile</div>
-      </div>
-    </div>
-    <b-modal id="modalError" centered :title="modalError.title" ok-only style="z-index:9001">
-      <pre>{{modalError.content}}</pre>
-    </b-modal>
-    <div align="center" style="margin-top:80px">
-      <router-view/>
-    </div> -->
     <navbar>
         <left>
           <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="15px"
@@ -154,30 +122,29 @@ Application Name</left>
 </template>
 
 <script>
-import techbilogo from './assets/techbilogo.svg'
+import techbilogo from "./assets/techbilogo.svg";
 export default {
-  name: 'App',
+  name: "App",
   data() {
     return {
-      modalError:{
-        title: '',
-        content: '',
+      modalError: {
+        title: "",
+        content: "",
         techbilogo
       }
-    }
+    };
   },
-  methods:{
-    messageError(title,content){
-      console.log(title)
-      this.modalError.title = title
-      this.modalError.content = content
-      this.$root.$emit('bv::show::modal', 'modalError')
+  methods: {
+    messageError(title, content) {
+      this.modalError.title = title;
+      this.modalError.content = content;
+      this.$root.$emit("bv::show::modal", "modalError");
     },
-    showPopUp(id){
+    showPopUp(id) {
       var x = document.getElementById(id);
       x.style.display = "block";
     },
-    closePopUp(id){
+    closePopUp(id) {
       var x = document.getElementById(id);
       x.style.display = "none";
     },
@@ -185,114 +152,7 @@ export default {
       this.$router.push(page)
     }
   }
-}
+};
 </script>
-
-<style src="./css/app.css"></style>
 <style src="./css/all.css"></style>
-<style>
-/* @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
-@import url('https://fonts.googleapis.com/css?family=Kanit:400,700');
-
-
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #707070;
-}
-
-body{
-  margin: 0px;
-}
-
-.borderOnTop{
-  width: 100%;
-  height: 70px;
-  background: #ffffff;
-  top:0;
-  display: flex;
-  justify-content: flex-start;
-  position: fixed;
-  z-index: 200;
-  box-shadow: 5px 5px 8px #888888;
-  flex-direction: row;
-}
-
-.sansirilogo{
-  width: 50px;
-  height: 40px;
-  margin: 15px;
-  margin-left:30px; 
-}
-
-.textOnTop{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color: #707070;
-}
-
-.headerThai{
-  font-family: 'Kanit', sans-serif;
-}
-
-.searchBox{
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.submitBtn{
-  width: auto;
-  height: auto;
-  background: #4974FF;
-  color: white;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 15px;
-  border: none;
-}
-
-.submitBtn:hover{
-  background: rgb(97, 134, 255);
-}
-.menuBtn{
-  width:50px;
-  height:50px;
-  position:fixed;
-  left:10px;
-  cursor: pointer;
-}
-.closeMenuBtn{
-  width:50px;
-  height:50px;
-  cursor: pointer;
-}
-
-.sideBar{
-  width:200px;
-  height:100vh;
-  position:fixed;
-  background:#000000;
-  top:0px;
-  display:none;
-}
-.divInSideBar{
-  width:100%;
-  margin-top:70px;
-  display:flex;
-  flex-direction:column;
-  color: #707070;
-}
-a {
-    color: #707070;
-}
-a:hover {
-    color: #707070;
-    text-decoration: none;
-} */
-</style>
+<style src="./css/app.css"></style>
