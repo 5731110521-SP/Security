@@ -2,14 +2,14 @@
     <div>
         
         <header>
-            <multiselect 
-                v-model="searchByRaw" 
+            <sui-dropdown
+                fluid
+                multiple
                 :options="searchOptions"
-                label="name"
-                track-by="code" 
-                :multiple="true"
-                :hide-selected="true">
-            </multiselect>
+                placeholder="Search By"
+                selection
+                v-model="searchByRaw"
+            />
             <input class='right_input' type="text" value="" v-model="searchValue">
             <button>Search</button>
         </header>
@@ -84,10 +84,10 @@ export default {
             searchBy: [],
             searchByRaw: [],
             searchOptions: [
-                {name:'System Name',code:'sysname'}, 
-                {name:'User',code:'user'}, 
-                {name:'IP Address',code:'ip'},
-                {name:'Action',code:'action'}
+                {text:'System Name',key:'sysname',value:'sysname'}, 
+                {text:'User',key:'user',value:'user'}, 
+                {text:'IP Address',key:'ip',value:'ip'},
+                {text:'Action',key:'action',value:'action'}
                 ],
             searchValue: '',
         }

@@ -121,6 +121,9 @@ Application Name</left>
   </div>
 </template>
 
+<script src="node_modules/vue/dist/vue.min.js"></script>
+<script src="node_modules/semantic-ui-vue/dist/umd/semantic-ui-vue.min.js"></script>
+
 <script>
 import techbilogo from "./assets/techbilogo.svg";
 export default {
@@ -154,5 +157,5 @@ export default {
   }
 };
 </script>
-<style src="./css/all.css"></style>
+
 <style src="./css/app.css"></style>
