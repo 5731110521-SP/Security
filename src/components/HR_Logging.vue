@@ -154,9 +154,8 @@ export default {
         });
     },
     getTime() {
-      // var datefrom = new Date(this.date_from)
-      // var dateto = new String(this.date_to)
-      // console.log(datefrom+dateto)
+      console.log(this.date_from.toISOString())
+
       axios
         .get("http://192.9.58.79:8000/api/security-hrlogtracking", {
           params: {
@@ -164,9 +163,9 @@ export default {
             memonum: this.memo_id,
             firstname: this.name_thai,
             lastname: this.surname_thai,
-            action: this.action,
-            fromdatetime: this.date_from,
-            todatetime: this.date_to
+            action: "Send Email",
+            fromdatetime: this.date_from.toISOString(),
+            todatetime: this.date_to.toISOString()
           }
         })
         .then(response => {
