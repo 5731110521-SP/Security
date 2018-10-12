@@ -7,7 +7,6 @@ import BootstrapVue from 'bootstrap-vue'
 import VueSession from 'vue-session'
 import Multiselect from 'vue-multiselect'
 import Modal from './components/Modal'
-import ConfigAdd from './components/ConfigAdd'
 import DatePicker from "vue2-datepicker";
 import SuiVue from 'semantic-ui-vue';
 import 'semantic-ui-css/semantic.min.css';
@@ -17,12 +16,10 @@ Vue.use(VueSession)
 Vue.use(SuiVue);
 Vue.component('multiselect', Multiselect)
 Vue.component('modal', Modal)
-Vue.component('config-add', ConfigAdd)
 Vue.component('date-picker', DatePicker)
 
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,

@@ -1,6 +1,5 @@
 <template>
     <div>
-        
         <header>
             <sui-dropdown
                 fluid
@@ -13,7 +12,6 @@
             <input class='right_input' type="text" value="" v-model="searchValue">
             <button>Search</button>
         </header>
-
         <content>
             <table cellspacing="0">
                 <thead>
@@ -27,7 +25,6 @@
                         <th>Custom Field</th>
                     </tr>
                 </thead>
-
                 <tbody>
                     <tr v-for="(item,index) in datalist" :key="index">
                         <td>{{item.createddate}}</td>
@@ -62,9 +59,6 @@
 </template>
 
 <script>
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-
 export default {
     name: 'ViewLog',
     data() {
@@ -82,7 +76,6 @@ export default {
             pageNumber: 1,
             pageSize: 4,
             searchBy: [],
-            searchByRaw: [],
             searchOptions: [
                 {text:'System Name',key:'sysname',value:'sysname'}, 
                 {text:'User',key:'user',value:'user'}, 
@@ -97,7 +90,6 @@ export default {
             this.pageNumber = 1
             this.getData()
         },
-        searchByRaw: "getParams",
         searchBy: "getData",
         pageNumber: "getData"
     },
@@ -140,12 +132,6 @@ export default {
         },
         handleSubmit(){
             this.getData()
-        },
-        getParams(){
-            this.searchBy = []
-            this.searchByRaw.forEach(element => {
-                this.searchBy.push(element.code)
-            });
         },
         pageBack(){
             if(this.pageNumber == 1) return

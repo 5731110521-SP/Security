@@ -41,10 +41,8 @@
                     </td>
                 </tr>
             </table>
-            <div style="width:100%;justify-content: space-between;display: flex;padding:0 20%">
-                <button class="submitBtn" type="button" @click="hideModel">Cancel</button>
-                <button class="submitBtn" type="submit">Save</button>
-            </div>
+            <button class="submitBtn" type="button" @click="hideModel">Cancel</button>
+            <button class="submitBtn" type="submit">Save</button>
         </form>
     </div>
 </template>
@@ -134,14 +132,17 @@ export default {
 
 <style>
 .submitBtn{
-  all: unset;
-  box-sizing: border-box;
-  color: #1c2c83;
-  border: 3px solid #1c2c83;
-  padding: 5px 10px;
-  justify-content: space-between;
-  align-items: center;
-  width: 100px;
+  /* margin-top: 30px; */
+  width: auto;
+  height: auto;
+  background: #4974FF;
+  color: white;
+  padding: 10px;
   cursor: pointer;
+  border-radius: 15px
+}
+
+.submitBtn:hover{
+  background: rgb(97, 134, 255);
 }
 </style>
