@@ -177,6 +177,8 @@ page headerinput .right_input {
 page headerinput button {
   all: unset;
   height: 40px;
+  width: auto;
+  height: auto;
   background-color: #38f3f3;
   color: white;
   font-size: 18px;

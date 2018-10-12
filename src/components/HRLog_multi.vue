@@ -2,34 +2,43 @@
     <div>
         <headerinput style="padding-top:20px">
             <div class="input_name">Search By: </div>
-            <multiselect 
-                v-model="searchByRaw" 
+            <sui-dropdown
+                multiple
+                fluid
                 :options="searchOptions"
-                label="name"
-                track-by="code" 
-                :multiple="true"
-                :hide-selected="true">
-            </multiselect>
+                placeholder="Search by"
+                search
+                selection
+                allow-additions
+                v-model="searchByRaw"
+            />
             <div></div>
             <input class='right_input' type="text" value="" v-model="searchValue">
+            <sui-dropdown
+                placeholder="Select Mode"
+                selection
+                :options="options"
+                v-model="condition"
+            />
         </headerinput>
         <headerinput>
             <div class="input_name">Date From: </div>
-            <input class='left_input' type="text" value="">
+            <date-picker style="margin:10px;" v-model="date_from" lang="en" type="datetime" format="[on] MM-DD-YYYY [at] HH:mm:ss" confirm></date-picker>
             <div class="input_name">To: </div>
-            <input class='right_input' type="text" value="">
+            <date-picker style="margin:10px;" v-model="date_to" lang="en" type="datetime" format="[to] MM-DD-YYYY [at] HH:mm:ss" confirm></date-picker>
         </headerinput>
         <headerinput>
             <div class="input_name">Action: </div>
-            <select class="left_input" name="cars">
-                <option value="volvo">Select</option>
-                <option value="volvo">Create memo</option>
-                <option value="saab">Send Email</option>
-                <option value="fiat">Approve</option>
+            <select class="left_input" v-model="action">
+                <option value=""></option>
+                <option value="Create Memo">Create memo</option>
+                <option value="Send Email">Send Email</option>
+                <option value="Approve">Approve</option>
             </select>
         </headerinput>
+        <button class="submitBtn" style="margin-left:25px;" type="submit" @click="getTime()">Search</button>
         <headerinput>
-            <button>Search</button>
+            
         </headerinput>
         <content>
             <table cellspacing="0">
@@ -44,16 +53,16 @@
                         <th>Error Message</th>
                     </tr>
                 </thead>
-
                 <tbody>
-                    <tr v-for="(item,index) in datalist" :key="index">
-                        <td>{{item.no}}</td>
-                        <td>{{item.memono}}</td>
-                        <td>{{item.actionname}}</td>
-                        <td>{{item.actionby}}</td>
-                        <td>{{item.actiondatetime}}</td>
-                        <td>{{item.status}}</td>
-                        <td>{{item.errormessage}}</td>
+                    <tr v-for="(data,index) in responseForTable" :key="index">
+                        <td>1</td>
+                        <td>{{ data.memonum }}</td>
+                        <td>{{ data.action }}</td>
+                        <td>{{ data.actionby }}</td>
+                        <td>{{ data.datetime }}</td>
+                        <td>{{ data.status }}</td>
+                        <td>{{ data.errmsg }}</td>
+                        <td>{{ gettime }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -71,170 +80,138 @@
 <script>
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import DatePicker from "vue2-datepicker";
 
 export default {
-    name: 'ViewLog',
+    name: 'HRLog_multi',
+    components: { DatePicker },
     data() {
         return {
-            datalist: [{
-                no: '1',
-                memono: 'OT19021001',
-                actionname: 'Create Memo',
-                actionby: 'ใจดี ดีงาม',
-                actiondatetime: '1/2/2018 10:00:32',
-                status: "Sucess",
-                errormessage: "",
-            },{
-                no: '1',
-                memono: 'OT19021001',
-                actionname: 'Create Memo',
-                actionby: 'ใจดี ดีงาม',
-                actiondatetime: '1/2/2018 10:00:32',
-                status: "Sucess",
-                errormessage: "",
-            },{
-                no: '1',
-                memono: 'OT19021001',
-                actionname: 'Create Memo',
-                actionby: 'ใจดี ดีงาม',
-                actiondatetime: '1/2/2018 10:00:32',
-                status: "Sucess",
-                errormessage: "",
-            },{
-                no: '1',
-                memono: 'OT19021001',
-                actionname: 'Create Memo',
-                actionby: 'ใจดี ดีงาม',
-                actiondatetime: '1/2/2018 10:00:32',
-                status: "Sucess",
-                errormessage: "",
-            },{
-                no: '1',
-                memono: 'OT19021001',
-                actionname: 'Create Memo',
-                actionby: 'ใจดี ดีงาม',
-                actiondatetime: '1/2/2018 10:00:32',
-                status: "Sucess",
-                errormessage: "",
-            },{
-                no: '1',
-                memono: 'OT19021001',
-                actionname: 'Create Memo',
-                actionby: 'ใจดี ดีงาม',
-                actiondatetime: '1/2/2018 10:00:32',
-                status: "Sucess",
-                errormessage: "",
-            },{
-                no: '1',
-                memono: 'OT19021001',
-                actionname: 'Create Memo',
-                actionby: 'ใจดี ดีงาม',
-                actiondatetime: '1/2/2018 10:00:32',
-                status: "Sucess",
-                errormessage: "",
-            },{
-                no: '1',
-                memono: 'OT19021001',
-                actionname: 'Create Memo',
-                actionby: 'ใจดี ดีงาม',
-                actiondatetime: '1/2/2018 10:00:32',
-                status: "Sucess",
-                errormessage: "",
-            },{
-                no: '1',
-                memono: 'OT19021001',
-                actionname: 'Create Memo',
-                actionby: 'ใจดี ดีงาม',
-                actiondatetime: '1/2/2018 10:00:32',
-                status: "Sucess",
-                errormessage: "",
-            },{
-                no: '1',
-                memono: 'OT19021001',
-                actionname: 'Create Memo',
-                actionby: 'ใจดี ดีงาม',
-                actiondatetime: '1/2/2018 10:00:32',
-                status: "Sucess",
-                errormessage: "",
-            },{
-                no: '1',
-                memono: 'OT19021001',
-                actionname: 'Create Memo',
-                actionby: 'ใจดี ดีงาม',
-                actiondatetime: '1/2/2018 10:00:32',
-                status: "Sucess",
-                errormessage: "",
-            },{
-                no: '1',
-                memono: 'OT19021001',
-                actionname: 'Create Memo',
-                actionby: 'ใจดี ดีงาม',
-                actiondatetime: '1/2/2018 10:00:32',
-                status: "Sucess",
-                errormessage: "",
-            }],
             datatotal: 0,
             pageNumber: 1,
             pageSize: 4,
             searchBy: [],
             searchByRaw: [],
             searchOptions: [
-                {name:'รหัสพนักงาน',code:'empcode'}, 
-                {name:'ชื่อพนักงาน',code:'empsurname'},
-                {name:'นามสกุล',code:'emplastname'},
-                {name:'Memo No.',code:'memono'}
+                {text:'รหัสพนักงาน',key:'employee_id',value:'empcode'}, 
+                {text:'ชื่อพนักงาน(ไทย)',key:'name_thai',value:'firstname'},
+                {text:'นามสกุล(ไทย)',key:'surname_thai',value:'lastname'},
+                {text:'Memo No.',key:'memo_id',value:'memonum'}
                 ],
             searchValue: '',
+            employee_id: "",
+            memo_id: "",
+            name_thai: "",
+            surname_thai: "",
+            date_from: "",
+            date_to: "",
+            action: "",
+            selected: "",
+            responseForTable: "",
+            time: "",
+            gettime: "",
+            condition: null,
+            options: [{
+                text: 'AND',
+                value: "and",
+            }, {
+                text: 'OR',
+                value: "or",
+            }],
         }
     },
-    watch:{
-        searchValue: function (val) {
-            this.pageNumber = 1
-            this.getData()
+    async mounted() {
+        const response = await axios.get(
+            "http://192.9.58.79:8000/api/security-hrlogtracking"
+        );
+        console.log("data : " + JSON.stringify(response.data));
+        this.responseForTable = response.data;
+    },
+    watch: {
+        time: async function() {
+        const response = await axios.get(
+            "http://192.9.58.79:8000/api/security-hrlogtracking"
+        );
+        // console.log("data : " + JSON.stringify(response.data));
+        this.responseForTable = response.data;
         },
-        searchByRaw: "getParams",
-        searchBy: "getData",
-        pageNumber: "getData"
-    },
-    computed:{
-        computedPageNumberMax: function(){
-            var floor = Math.floor(this.datatotal/this.pageSize)
-            if(this.datatotal/this.pageSize>floor){
-                return floor+1
-            }else{
-                return floor
-            }
+        gettime: function() {
+        this.responseForTable = this.gettime;
         }
-    },
-    created(){
-        this.getData()
     },
     methods:{
-        getData(){
-            // var vm = this
-            // axios.get(process.env.ROOT_API+'security-logtracking',{
-            //     params: {
-            //         fields: this.searchBy,
-            //         value: this.searchValue,
-            //         pagenumber: this.pageNumber,
-            //         pagesize: this.pageSize,
+        getTime() {
+            // console.log(this.date_from.toISOString())
+            // console.log(this.action)
+            // console.log(this.searchByRaw)
+            // console.log(this.searchValue)
+            // this.employee_id = null
+            // this.name_thai = null
+            // this.surname_thai = null
+            // this.memo_id = null
+            var datefrom = this.date_from
+            var dateto = this.date_to
+            // var arraySearch = this.searchByRaw
+            var result = this.searchValue.split(",")
+            // for(let i=0;i<arraySearch.length;i++) {
+            //     if(arraySearch[i]=='employee_id'){
+            //         this.employee_id = result[i]
             //     }
-            // })
-            // .then(response => {
-            //     if(response.data == null){
-            //         vm.datalist = []
-            //         vm.datatotal = 0
-            //     }else{
-            //         vm.datalist = response.data.logtracking
-            //         vm.datatotal = response.data.total
+            //     else if(arraySearch[i]=='name_thai'){
+            //         this.name_thai = result[i]
             //     }
-            //   })
-            //   .catch(function (error) {
-            //     console.log(error);
-            //   })
-        },
-        handleSubmit(){
-            this.getData()
+            //     else if(arraySearch[i]=='surname_thai'){
+            //         this.surname_thai = result[i]
+            //     }
+            //     else{
+            //         this.memo_id = result[i]
+            //     }
+            // }
+            if(this.action == ''){
+                this.action = null
+            }
+            if(this.date_from != '' && this.date_from != null){
+                console.log(this.date_from)
+                datefrom = this.date_from.toISOString()
+            }
+            else{
+                datefrom = null
+            }
+            if(this.date_to != '' && this.date_to != null){
+                dateto = this.date_to.toISOString()
+            }
+            else{
+                dateto = null
+            }
+
+            axios
+                .get("http://192.9.58.79:8000/api/security-hrlogtracking", {
+                    params: {
+                        // empcode: this.employee_id,
+                        // memonum: this.memo_id,
+                        // firstname: this.name_thai,
+                        // lastname: this.surname_thai,
+                        // action: this.action,
+                        fields: this.searchByRaw,
+                        value: result,
+                        action: this.action,
+                        fromdatetime: datefrom,
+                        todatetime: dateto,
+                        condition: this.condition
+                    }
+                })
+                .then(response => {
+                    if (response.data == null) {
+                        this.responseForTable = []
+                        console.log(error);
+                    } else {
+                        this.responseForTable = response.data;
+                        console.log("time: " + this.gettime);
+                    }
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
         },
         getParams(){
             this.searchBy = []
@@ -301,5 +278,23 @@ export default {
 
 .pagination .hidden{
     visibility: hidden;
+}
+.submitBtn {
+  /* margin-top: 30px; */
+  width: auto;
+  height: auto;
+  background-color: #38f3f3;
+  color: white;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  z-index: -1;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.submitBtn:hover {
+  background: rgb(97, 134, 255);
 }
 </style>

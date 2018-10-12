@@ -8,7 +8,7 @@
                 :options="searchOptions"
                 placeholder="Search By"
                 selection
-                v-model="searchByRaw"
+                v-model="searchBy"
             />
             <input class='right_input' type="text" value="" v-model="searchValue">
             <button>Search</button>
