@@ -15,33 +15,34 @@ navbar {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 100px;
+  height: 80px;
   background-color: #1c2c83;
-  z-index: 3;
+  z-index: 10;
 }
 navbar left {
   width: auto;
   display: flex;
   align-items: center;
-  padding: 15px;
+  padding: 20px;
+  padding-left:30px;
   color: white;
-  font-size: 16px;
-  font-size: 32px;
+  font-size: 25px;
 }
 navbar left object {
   margin-right: 15px;
 }
 navbar right {
+  margin-right: 20px;  
   width: auto;
   display: flex;
   align-items: center;
-  padding: 15px;
+  padding: 20px;
   color: white;
-  font-size: 16px;
-  font-size: 20px;
+  font-size: 15px;
 }
 navbar right * {
   margin: 30px;
+  font-size: 18px;
 }
 navbar right i {
   font-size: 30px;
@@ -63,139 +64,106 @@ navbar right button i {
 }
 
 page {
-  margin-top: 100px;
   display: grid;
-  grid-template-columns: 17% 83%;
-  grid-template-rows: 75px auto;
-  grid-template-areas: "sidebar container_header" "sidebar container_content";
+  grid-template-columns: 20% 80%;
+  grid-template-rows: 80px auto;
+  grid-template-areas: 
+  ". ."
+  ". header"
+  ". content";
 }
-page sidebar {
-  grid-area: sidebar;
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-}
-page sidebar item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 18px;
-  height: 44px;
-  border-bottom: 1px solid #ddd;
-  color: #777;
-  cursor: pointer;
-}
-page sidebar item i {
-  color: #ccc;
-}
+
 page header {
   padding: 20px;
-  grid-area: container_header;
+  grid-area: header;
   display: grid;
-  grid-template-columns: 30% 30% 10% 10% 20%;
-  grid-template-rows: auto;
-  grid-template-areas: "left_input right_input button";
+  grid-template-columns: 40% 20% auto 20%;
+  grid-template-rows: auto auto;
+  grid-template-areas: 
+  "contentHeader contentHeader . addButton"
+  "left_input left_input right_input right_input";
 }
-page header .left_input, page header .right_input {
-  all: unset;
-  border: 1px solid #ccc;
+
+page header .left_input, page header .right_input{
+  /* border: 1px solid #ccc; */
   width: 100%;
-  height: 40px;
+  height: 60px;
   padding: 10px;
   box-sizing: border-box;
 }
+
+page header contentHeader{
+  padding: 10px 10px 10px 0px;
+  font-family: 'Montserrat', sans-serif;
+  text-align: start;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto auto;
+  grid-template-areas: 
+  "mainHeader"
+  "description";
+}
+
+page header contentHeader mainHeader{
+  grid-area: mainHeader;
+  font-size: 30px;
+  font-weight: bold;
+  color: #171463
+}
+
+page header contentHeader description{
+  grid-area: description;
+  margin-top: 10px; 
+  font-size: 15px;
+}
+
 page header .left_input {
   grid-area: left_input;
+  height: 40px;
   border-right: none;
+  padding-left : 0px;
+  padding-right: 0px;
+  
 }
 page header .right_input {
   grid-area: right_input;
-}
-page header button {
-  all: unset;
   height: 40px;
-  grid-area: button;
-  background-color: #38f3f3;
-  color: white;
-  font-size: 18px;
+  width: 100%;
+  font-size: 15px; 
+  margin:auto;
+  margin-left:0px;
+  border: #0000001f solid 1px;
+  border-radius: 5px;
+}
+page header .addButton {
+  height: 40px;
+  grid-area: addButton;
+  font-size: 15px;
   font-weight: bold;
   text-align: center;
-  z-index: -1;
-  cursor: pointer;
-}
-page header .search_button {
-  all: unset;
-  height: 40px;
-  grid-area: button;
-  background-color: #38f3f3;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  z-index: -1;
-  cursor: pointer;
-}
-page header .new_button {
-  all: unset;
-  box-sizing: border-box;
-  color: #1c2c83;
-  border: 3px solid #1c2c83;
-  padding: 5px 10px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 100px;
+
+  font-family: "Montserrat", sans-serif;
+  width: auto;
+  height: 44px;
+  background: #1c2c83;
+  color: #ffffff;
+  margin: 10px;
+  margin-right: 0px;
   cursor: pointer;
-}
-page headerinput {
-  padding: 0px 0px 20px 20px;
-  display: grid;
-  grid-template-columns: 0.5fr 30% 0.5fr 30% 1fr;
-  grid-template-rows: auto;
-}
-page headerinput .input_name{
-  width: 100%;
-  height: 40px;
-  padding: 10px;
-  box-sizing: border-box;
+  border-radius: 2px;
+  border:none;
 }
 
-page headerinput .left_input {
-  height:40px;
-  border-right: none;
-  border: 1px solid #ccc;
-  width: 100%;
+page header .addButton:hover{
+  background:#3448b8;
+  color: #ffffff;
 }
-
-page headerinput .right_input {
-  height:40px;
-  border-left: none;
-  border: 1px solid #ccc;
-  width: 100%;
-}
-
-page headerinput button {
-  all: unset;
-  height: 40px;
-  background-color: #38f3f3;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  z-index: -1;
-  cursor: pointer;
-}
-
-page .header-switch {
-  padding: 0px 0px 20px 20px;
-  display: grid;
-  grid-template-columns: 0.5fr 10% 10% 10% 30% 1.5fr;
-  grid-template-rows: auto;
-}
-
 page content {
-  grid-area: container_content;
-  padding: 20px;
+  grid-area: content;
+  margin: 20px;
+  margin-top:0px;
 }
 page content table {
   width: 100%;
@@ -203,45 +171,27 @@ page content table {
 page content table thead th {
   text-align: left;
   padding: 15px;
+  font-size: 15px;
 }
 page content table thead tr {
   height: 40px;
-  background-color: #525151;
-  color: white;
+  background-color: #ffffff;
+  color: #000000;
+  border-bottom: #00000041 solid 1px;
 }
 page content table tbody tr {
   height: 40px;
-  background-color: #fefefe;
+  /* background-color: #fefefe; */
+  border-bottom: #00000041 solid 1px;
 }
 page content table tbody tr:nth-child(2n) {
-  background-color: #f8f8f8;
+  /* background-color: #f8f8f8; */
+  border-bottom: #00000041 solid 1px;
 }
 page content table tbody tr td {
   text-align: left;
   padding: 15px;
-}
-
-.pagination {
-  display: inline-block;
-}
-
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.pagination a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.pagination a:hover:not(.active) {background-color: #ddd;}
-
-.pagination .hidden{
-  visibility: hidden;
+  font-size: 15px;
 }
 
 /*# sourceMappingURL=app.css.map */
