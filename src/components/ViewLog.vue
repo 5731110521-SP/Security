@@ -3,7 +3,7 @@
         <header>
           <contentHeader>
             <mainHeader>Customer Tracking Log</mainHeader>
-            <description>for view log of customer data tracking.</description>
+            <description>description.</description>
           </contentHeader>
                 <sui-dropdown
                     class="left_input"

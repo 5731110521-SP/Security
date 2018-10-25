@@ -245,6 +245,11 @@ export default {
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style>
+
+header{
+  margin-top:80px;
+}
+
 .modal-mask {
   position: fixed;
   z-index: 9000;
